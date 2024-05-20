@@ -29,15 +29,12 @@ object main extends IOApp.Simple:
     _ <- Stream
       .resource(resources)
       .flatMap { httpServer =>
-        for {
-          given Logger[IO] <- DefaultLogger.makeIo(Output.fromConsole)
-          _ <- Logger[IO].warn("Before exception") // TODO: doesn't print anything
-        } yield ()
+        Stream.eval(logger.warn("Before exception")) ++ 
         Stream.eval(httpServer.useForever).concurrently {
           throw new RuntimeException("Catch me and log to console")
         }
       }
-      .handleError { e =>
+      .handleErrorWith { e =>
         Stream.eval {
           logger.error(s"An error occured: $e") // TODO: doesn't print anything
         }
