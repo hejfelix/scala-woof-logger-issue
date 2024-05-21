@@ -10,6 +10,7 @@ lazy val root = (project in file("."))
       "org.typelevel" %% "cats-core" % "2.10.0",
       "org.typelevel" %% "cats-effect" % "3.5.1",
       "org.legogroup" %% "woof-core" % "0.7.0",
+      "org.legogroup" %% "woof-slf4j-2" % "0.7.0",
       "org.http4s" %% s"http4s-ember-client" % versionHttp4S,
       "org.http4s" %% s"http4s-ember-server" % versionHttp4S,
       "org.http4s" %% s"http4s-dsl" % versionHttp4S,
